@@ -8,9 +8,10 @@ const bookCtrl = require('../controllers/book');
 router.get('/', bookCtrl.getAllBook);
 router.post('/', auth, multer, bookCtrl.createBook);
 router.get('/bestrating', bookCtrl.getBestRating);
+
 router.get('/:id', bookCtrl.getOneBook);
-router.put('/:id', auth, multer, bookCtrl.modifyBook);
 router.post('/:id/rating', auth, bookCtrl.addRating);
+router.put('/:id', auth, multer, bookCtrl.modifyBook);
 router.delete('/:id', auth, bookCtrl.deleteBook);
 
 // premiérement vérif de l'authentification puis ensuite multer pour envoi fichiers

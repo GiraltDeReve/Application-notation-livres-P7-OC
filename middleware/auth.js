@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
     console.log(process.env.TOKEN_SECRET);
     const token = req.headers.authorization.split(' ')[1];
     // on récupére le token en enelevant espéca et en récup deuxiéme élément (tableau commence par 0)
-    const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+    const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
     //'RANDOM_TOKEN_SECRET'
     // process.env.TOKEN_SECRET
     // pour décoder token, on utilise la fonction verify de jasonwebtoken (on passe le token recup et la key secret)
