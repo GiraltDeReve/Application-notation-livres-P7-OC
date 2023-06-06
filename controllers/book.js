@@ -157,6 +157,7 @@ exports.addRating = async (req, res, next) => {
   const ratingObject = req.body;
   ratingObject.grade = ratingObject.rating;
   delete ratingObject.rating;
+  // const { userId, rating } = req.body;
 
   try {
     const updatedBook = await Book.findOneAndUpdate(
@@ -176,12 +177,10 @@ exports.addRating = async (req, res, next) => {
 
     const bookWithAverageRating = await Book.findOneAndUpdate(
       { _id: req.params.id },
-      { averageRating: averageRates }
+      { averageRating: averageRates },
       // mise à jour note moyenne (averageRating) du livre avec la nouvelle note moyenne calculée
-      // { new: true }
+      { new: true }
     );
-
-    console.log(req.params.id);
 
     res.status(201).json({
       message: 'Note moyenne du livre mise à jour',
