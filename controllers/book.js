@@ -160,6 +160,9 @@ exports.addRating = async (req, res, next) => {
   // const { userId, rating } = req.body;
 
   try {
+    // if (book.rating.find((r) => r.userId === userId)) {
+    //   return res.status(400).json({ message: 'Vous avez déjà noté ce livre.' });
+    // }
     const updatedBook = await Book.findOneAndUpdate(
       { _id: req.params.id },
       { $push: { ratings: ratingObject }, $inc: { totalRatings: 1 } },
@@ -182,8 +185,9 @@ exports.addRating = async (req, res, next) => {
       { new: true }
     );
 
+    console.log(bookWithAverageRating);
+
     res.status(201).json({
-      message: 'Note moyenne du livre mise à jour',
       book: bookWithAverageRating,
       _id: req.params.id,
     });
